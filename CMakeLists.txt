@@ -18,6 +18,11 @@ set(FLUID_SOURCES src/FluidDecoder.cpp)
 
 set(DEPLIBS ${FLUIDSYNTH_LIBRARIES})
 
+# the cmake var SOUND_FONT can be used to set a platform specific default sound font
+# e.g. -DSOUND_FONT=/path/to/some_sound_font.sf2
+option(SOUND_FONT "Default sound font" "")
+
+
 build_addon(audiodecoder.fluidsynth FLUID DEPLIBS)
 
 include(CPack)

@@ -1,0 +1,12 @@
+audiodecoder.fluidsynth/resources/settings.xml
+audiodecoder.fluidsynth/addon.xml
+debian/.debhelper/*
+debian/*.log
+debian/*.substvars
+debian/debhelper-build-stamp
+debian/files
+debian/kodi-audiodecoder-fluidsynth-dbg/
+debian/kodi-audiodecoder-fluidsynth/
+debian/tmp/
+obj-x86_64-linux-gnu/
+
