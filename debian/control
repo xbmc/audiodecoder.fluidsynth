@@ -1,0 +1,22 @@
+Source: kodi-audiodecoder-fluidsynth
+Priority: extra
+Maintainer: wsnipex <wsnipex@a1.net>
+Build-Depends: debhelper (>= 8.0.0), cmake, kodi-addon-dev, kodi-audio-dev, libfluidsynth-dev
+Standards-Version: 3.9.8
+Section: libs
+Homepage: http://kodi.tv
+
+Package: kodi-audiodecoder-fluidsynth
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, fluid-soundfont-gm | timgm6mb-soundfont
+Description: Fluidsynth audio decoder for Kodi
+ Fluidsynth Midi audio decoder for Kodi
+
+Package: kodi-audiodecoder-fluidsynth-dbg
+Section: debug
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: debug symbols for Fluidsynth audio decoder for Kodi
+ debug symbols for Fluidsynth Midi audio decoder for Kodi
+
