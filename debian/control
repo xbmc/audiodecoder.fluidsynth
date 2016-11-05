@@ -9,7 +9,7 @@ Homepage: http://kodi.tv
 Package: kodi-audiodecoder-fluidsynth
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, fluid-soundfont-gm | timgm6mb-soundfont
+Depends: ${shlibs:Depends}, ${misc:Depends}, fluid-soundfont-gm
 Description: Fluidsynth audio decoder for Kodi
  Fluidsynth Midi audio decoder for Kodi
 
