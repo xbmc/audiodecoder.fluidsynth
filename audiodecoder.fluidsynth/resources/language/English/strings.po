@@ -15,3 +15,11 @@ msgstr ""
 msgctxt "#30000"
 msgid "Soundfont"
 msgstr ""
+
+msgctxt "#30001"
+msgid "Soundfont not configured"
+msgstr ""
+
+msgctxt "#30002"
+msgid "Check add-on settings"
+msgstr ""

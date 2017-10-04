@@ -11,7 +11,7 @@ find_package(FluidSynth REQUIRED)
 
 include(ExternalProject)
 
-include_directories(${KODI_INCLUDE_DIR}
+include_directories(${KODI_INCLUDE_DIR}/..
                     ${FLUIDSYNTH_INCLUDE_DIRS})
 
 set(FLUID_SOURCES src/FluidDecoder.cpp)

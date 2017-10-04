@@ -17,138 +17,112 @@
  *
  */
 
-#include "libXBMC_addon.h"
+#include <kodi/addon-instance/AudioDecoder.h>
+#include <kodi/Filesystem.h>
+#include <kodi/gui/dialogs/OK.h>
 #include <fluidsynth.h>
-
-extern "C" {
-#include <stdio.h>
-#include <stdint.h>
-
-#include "kodi_audiodec_dll.h"
-
-ADDON::CHelper_libXBMC_addon *XBMC           = NULL;
-char soundfont[1024];
-
-ADDON_STATUS ADDON_Create(void* hdl, void* props)
-{
-  if (!XBMC)
-    XBMC = new ADDON::CHelper_libXBMC_addon;
-
-  if (!XBMC->RegisterMe(hdl))
-  {
-    delete XBMC, XBMC=NULL;
-    return ADDON_STATUS_PERMANENT_FAILURE;
-  }
-
-  return ADDON_STATUS_NEED_SETTINGS;
-}
-
-//-- Destroy ------------------------------------------------------------------
-// Do everything before unload of this add-on
-// !!! Add-on master function !!!
-//-----------------------------------------------------------------------------
-void ADDON_Destroy()
-{
-  delete XBMC;
-  XBMC = NULL;
-}
-
-//-- GetStatus ---------------------------------------------------------------
-// Returns the current Status of this visualisation
-// !!! Add-on master function !!!
-//-----------------------------------------------------------------------------
-ADDON_STATUS ADDON_GetStatus()
-{
-  return ADDON_STATUS_OK;
-}
-
-//-- SetSetting ---------------------------------------------------------------
-// Set a specific Setting value (called from XBMC)
-// !!! Add-on master function !!!
-//-----------------------------------------------------------------------------
-ADDON_STATUS ADDON_SetSetting(const char *strSetting, const void* value)
-{
-  if (strcmp(strSetting,"soundfont") == 0)
-    strcpy(soundfont, (const char*)value);
-
-  return ADDON_STATUS_OK;
-}
 
 struct FluidContext
 {
-  fluid_settings_t* settings;
-  fluid_synth_t* synth;
-  fluid_player_t* player;
+  fluid_settings_t* settings = nullptr;
+  fluid_synth_t* synth = nullptr;
+  fluid_player_t* player = nullptr;
 };
 
-void* Init(const char* strFile, unsigned int filecache, int* channels,
-           int* samplerate, int* bitspersample, int64_t* totaltime,
-           int* bitrate, AEDataFormat* format, const AEChannel** channelinfo)
+class CFluidCodec : public kodi::addon::CInstanceAudioDecoder,
+                    public kodi::addon::CAddonBase
 {
-  FluidContext* result = new FluidContext;
-  result->settings = new_fluid_settings();
-  result->synth = new_fluid_synth(result->settings);
-  fluid_synth_sfload(result->synth, soundfont, 1);
-  result->player = new_fluid_player(result->synth);
-  
-  void* f = XBMC->OpenFile(strFile, 0);
-  size_t size = XBMC->GetFileLength(f);
-  char* temp = new char[size];
-  XBMC->ReadFile(f, temp, size);
-  XBMC->CloseFile(f);
-  fluid_player_add_mem(result->player, temp, size);
-  delete[] temp;
-  fluid_player_play(result->player);
-  static enum AEChannel map[3] = {
-    AE_CH_FL, AE_CH_FR, AE_CH_NULL
-  };
-  *format = AE_FMT_FLOAT;
-  *channelinfo = map;
-  *channels = 2;
+public:
+  CFluidCodec(KODI_HANDLE instance) :
+    CInstanceAudioDecoder(instance)
+  {
+    m_soundfont = kodi::GetSettingString("soundfont");
+  }
 
-  *bitspersample = 32;
-  *bitrate = 0.0;
+  virtual ~CFluidCodec()
+  {
+    if (ctx.player)
+      delete_fluid_player(ctx.player);
+    if (ctx.synth)
+      delete_fluid_synth(ctx.synth);
+    if (ctx.settings)
+      delete_fluid_settings(ctx.settings);
+  }
 
-  *samplerate = 44100;
-  *totaltime = 0;
+  virtual bool Init(const std::string& filename, unsigned int filecache,
+                    int& channels, int& samplerate,
+                    int& bitspersample, int64_t& totaltime,
+                    int& bitrate, AEDataFormat& format,
+                    std::vector<AEChannel>& channellist) override
+  {
+    if (m_soundfont.empty() || m_soundfont == "OFF")
+    {
+      kodi::gui::dialogs::OK::ShowAndGetInput("Soundfont not configured", "Check add-on settings");
+      return false;
+    }
+    kodi::vfs::CFile file;
+    if (!file.OpenFile(filename, 0))
+      return false;
 
-  return result;
-}
+    ctx.settings = new_fluid_settings();
+    ctx.synth = new_fluid_synth(ctx.settings);
+    fluid_synth_sfload(ctx.synth, m_soundfont.c_str(), 1);
+    ctx.player = new_fluid_player(ctx.synth);
 
-int ReadPCM(void* context, uint8_t* pBuffer, int size, int *actualsize)
+    size_t size = file.GetLength();
+    char* temp = new char[size];
+    file.Read(temp, size);
+    file.Close();
+    fluid_player_add_mem(ctx.player, temp, size);
+    delete[] temp;
+    fluid_player_play(ctx.player);
+    format = AE_FMT_FLOAT;
+    channellist = { AE_CH_FL, AE_CH_FR };
+    channels = 2;
+
+    bitspersample = 32;
+    bitrate = 0.0;
+
+    samplerate = 44100;
+    totaltime = 0;
+
+    return true;
+  }
+
+  virtual int ReadPCM(uint8_t* buffer, int size, int& actualsize) override
+  {
+    if (fluid_player_get_status(ctx.player) == FLUID_PLAYER_DONE)
+      return 1;
+
+    fluid_synth_write_float(ctx.synth, size/8, buffer, 0, 2, buffer, 1, 2);
+    actualsize = size;
+    return 0;
+  }
+
+  virtual int64_t Seek(int64_t time) override
+  {
+    return -1;
+  }
+
+private:
+  FluidContext ctx;
+  std::string m_soundfont;
+};
+
+
+class ATTRIBUTE_HIDDEN CMyAddon : public kodi::addon::CAddonBase
 {
-  FluidContext* ssf = (FluidContext*)context;
-  if (fluid_player_get_status(ssf->player) == FLUID_PLAYER_DONE)
-    return 1;
-  fluid_synth_write_float(ssf->synth, size/8, pBuffer, 0, 2, pBuffer, 1, 2);
+public:
+  CMyAddon() { }
+  virtual ADDON_STATUS CreateInstance(int instanceType, std::string instanceID, KODI_HANDLE instance, KODI_HANDLE& addonInstance) override
+  {
+    addonInstance = new CFluidCodec(instance);
+    return ADDON_STATUS_OK;
+  }
+  virtual ~CMyAddon()
+  {
+  }
+};
 
-  *actualsize = size;
-  return 0;
-}
 
-int64_t Seek(void* context, int64_t time)
-{
-  return -1;
-}
-
-bool DeInit(void* context)
-{
-  FluidContext* ssf = (FluidContext*)context;
-  delete_fluid_player(ssf->player);
-  delete_fluid_synth(ssf->synth);
-  delete_fluid_settings(ssf->settings);
-  delete ssf;
-
-  return true;
-}
-
-bool ReadTag(const char* strFile, char* title, char* artist, int* length)
-{
-  return false;
-}
-
-int TrackCount(const char* strFile)
-{
-  return 1;
-}
-}
+ADDONCREATOR(CMyAddon);
