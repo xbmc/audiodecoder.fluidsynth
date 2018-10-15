@@ -2,8 +2,8 @@
 
 This is a [Kodi](http://kodi.tv) audio decoder addon for midi files.
 
-[![Build Status](https://travis-ci.org/notspiff/audiodecoder.fluidsynth.svg?branch=master)](https://travis-ci.org/notspiff/audiodecoder.fluidsynth)
-[![Build Status](https://ci.appveyor.com/api/projects/status/github/notspiff/audiodecoder.fluidsynth?svg=true)](https://ci.appveyor.com/project/notspiff/audiodecoder-fluidsynth)
+[![Build Status](https://travis-ci.org/xbmc/audiodecoder.fluidsynth.svg?branch=master)](https://travis-ci.org/xbmc/audiodecoder.fluidsynth)
+[![Build Status](https://ci.appveyor.com/api/projects/status/github/xbmc/audiodecoder.fluidsynth?svg=true)](https://ci.appveyor.com/project/xbmc/audiodecoder-fluidsynth)
 
 ## Build instructions
 
@@ -17,7 +17,7 @@ The following instructions assume you will have built Kodi already in the `kodi-
 suggested by the README.
 
 1. `git clone https://github.com/xbmc/xbmc.git`
-2. `git clone https://github.com/notspiff/audiodecoder.fluidsynth.git`
+2. `git clone https://github.com/xbmc/audiodecoder.fluidsynth.git`
 3. `cd audiodecoder.fluidsynth && mkdir build && cd build`
 4. `cmake -DADDONS_TO_BUILD=audiodecoder.fluidsynth -DADDON_SRC_PREFIX=../.. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=../../xbmc/kodi-build/addons -DPACKAGE_ZIP=1 ../../xbmc/cmake/addons`
 5. `make`
