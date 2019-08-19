@@ -1,5 +1,9 @@
-audiodecoder.fluidsynth/resources/settings.xml
-audiodecoder.fluidsynth/addon.xml
+# build artifacts
+build/
+obj-x86_64-linux-gnu/
+audiodecoder.*/resources/settings.xml
+audiodecoder.*/addon.xml
+
 debian/.debhelper/*
 debian/*.log
 debian/*.substvars
@@ -8,5 +12,29 @@ debian/files
 debian/kodi-audiodecoder-fluidsynth-dbg/
 debian/kodi-audiodecoder-fluidsynth/
 debian/tmp/
-obj-x86_64-linux-gnu/
 
+# commonly used editors
+# vim
+*.swp
+
+# Eclipse
+*.project
+*.cproject
+.classpath
+*.sublime-*
+.settings/
+
+# KDevelop 4
+*.kdev4
+
+# gedit
+*~
+
+# CLion
+/.idea
+
+# clion
+.idea/
+
+# KDev
+*.kdev4
