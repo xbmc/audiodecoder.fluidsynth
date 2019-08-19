@@ -7,16 +7,15 @@
 
 find_package(PkgConfig)
 if(PKG_CONFIG_FOUND)
-  pkg_check_modules (FLUIDSYNTH fluidsynth)
-  list(APPEND FLUIDSYNTH_INCLUDE_DIRS ${FLUIDSYNTH_INCLUDEDIR})
+  pkg_check_modules(PC_FLUIDSYNTH fluidsynth QUIET)
 endif()
 
-if(NOT FLUIDSYNTH_FOUND)
-  find_path(FLUIDSYNTH_INCLUDE_DIRS fluidsynth.h)
-  find_library(FLUIDSYNTH_LIBRARIES NAMES fluidsynth)
-endif()
+find_path(FLUIDSYNTH_INCLUDE_DIRS fluidsynth.h
+                                  PATHS ${PC_FLUIDSYNTH_INCLUDEDIR})
+find_library(FLUIDSYNTH_LIBRARIES fluidsynth
+                                  PATHS ${PC_FLUIDSYNTH_LIBDIR})
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(FluidSynth DEFAULT_MSG FLUIDSYNTH_INCLUDE_DIRS FLUIDSYNTH_LIBRARIES)
+find_package_handle_standard_args(FluidSynth REQUIRED_VARS FLUIDSYNTH_INCLUDE_DIRS FLUIDSYNTH_LIBRARIES)
 
 mark_as_advanced(FLUIDSYNTH_INCLUDE_DIRS FLUIDSYNTH_LIBRARIES)
