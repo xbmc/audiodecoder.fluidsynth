@@ -29,8 +29,7 @@ struct FluidContext
   fluid_player_t* player = nullptr;
 };
 
-class CFluidCodec : public kodi::addon::CInstanceAudioDecoder,
-                    public kodi::addon::CAddonBase
+class ATTRIBUTE_HIDDEN CFluidCodec : public kodi::addon::CInstanceAudioDecoder
 {
 public:
   CFluidCodec(KODI_HANDLE instance) :
