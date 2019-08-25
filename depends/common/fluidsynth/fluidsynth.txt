@@ -1,1 +1,1 @@
-fluidsynth http://downloads.sourceforge.net/project/fluidsynth/fluidsynth-1.1.6/fluidsynth-1.1.6.tar.gz
+fluidsynth https://github.com/FluidSynth/fluidsynth/archive/v2.0.6.tar.gz
