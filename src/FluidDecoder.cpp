@@ -18,6 +18,7 @@
  */
 
 #include <kodi/addon-instance/AudioDecoder.h>
+#include <kodi/General.h>
 #include <kodi/Filesystem.h>
 #include <kodi/gui/dialogs/OK.h>
 #include <fluidsynth.h>
@@ -38,7 +39,7 @@ public:
     m_soundfont = kodi::GetSettingString("soundfont");
   }
 
-  virtual ~CFluidCodec()
+  ~CFluidCodec() override
   {
     if (ctx.player)
       delete_fluid_player(ctx.player);
@@ -48,11 +49,11 @@ public:
       delete_fluid_settings(ctx.settings);
   }
 
-  virtual bool Init(const std::string& filename, unsigned int filecache,
-                    int& channels, int& samplerate,
-                    int& bitspersample, int64_t& totaltime,
-                    int& bitrate, AEDataFormat& format,
-                    std::vector<AEChannel>& channellist) override
+  bool Init(const std::string& filename, unsigned int filecache,
+            int& channels, int& samplerate,
+            int& bitspersample, int64_t& totaltime,
+            int& bitrate, AEDataFormat& format,
+            std::vector<AEChannel>& channellist) override
   {
     if (m_soundfont.empty() || m_soundfont == "OFF")
     {
@@ -88,7 +89,7 @@ public:
     return true;
   }
 
-  virtual int ReadPCM(uint8_t* buffer, int size, int& actualsize) override
+  int ReadPCM(uint8_t* buffer, int size, int& actualsize) override
   {
     if (fluid_player_get_status(ctx.player) == FLUID_PLAYER_DONE)
       return 1;
@@ -98,7 +99,7 @@ public:
     return 0;
   }
 
-  virtual int64_t Seek(int64_t time) override
+  int64_t Seek(int64_t time) override
   {
     return -1;
   }
@@ -112,15 +113,13 @@ private:
 class ATTRIBUTE_HIDDEN CMyAddon : public kodi::addon::CAddonBase
 {
 public:
-  CMyAddon() { }
-  virtual ADDON_STATUS CreateInstance(int instanceType, std::string instanceID, KODI_HANDLE instance, KODI_HANDLE& addonInstance) override
+  CMyAddon() = default;
+  ADDON_STATUS CreateInstance(int instanceType, std::string instanceID, KODI_HANDLE instance, KODI_HANDLE& addonInstance) override
   {
     addonInstance = new CFluidCodec(instance);
     return ADDON_STATUS_OK;
   }
-  virtual ~CMyAddon()
-  {
-  }
+  ~CMyAddon() = default;
 };
 
 
