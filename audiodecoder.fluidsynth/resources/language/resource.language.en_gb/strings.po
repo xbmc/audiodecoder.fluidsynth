@@ -20,6 +20,14 @@ msgctxt "#30001"
 msgid "To use FluidSynth you need a working sound font"
 msgstr ""
 
+msgctxt "#30002"
+msgid "Scan MIDI for title"
+msgstr ""
+
+msgctxt "#30003"
+msgid "Search in MIDI file for information to get an exact title"
+msgstr ""
+
 msgctxt "#30010"
 msgid "SoundFont audio decode"
 msgstr ""

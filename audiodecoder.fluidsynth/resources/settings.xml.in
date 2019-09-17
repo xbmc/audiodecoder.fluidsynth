@@ -10,6 +10,10 @@
           </constraints>
           <control type="button" format="file"/>
         </setting>
+        <setting id="scantext" type="boolean" label="30002" help="30003">
+          <default>true</default>
+          <control type="toggle" />
+        </setting>
       </group>
     </category>
   </section>
