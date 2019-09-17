@@ -17,9 +17,21 @@ msgid "Soundfont"
 msgstr ""
 
 msgctxt "#30001"
-msgid "Soundfont not configured"
+msgid "To use FluidSynth you need a working sound font"
 msgstr ""
 
 msgctxt "#30002"
-msgid "Check add-on settings"
+msgid "Scan MIDI for title"
+msgstr ""
+
+msgctxt "#30003"
+msgid "Search in MIDI file for information to get an exact title"
+msgstr ""
+
+msgctxt "#30010"
+msgid "SoundFont audio decode"
+msgstr ""
+
+msgctxt "#30011"
+msgid "Soundfont not configured, check add-on settings"
 msgstr ""

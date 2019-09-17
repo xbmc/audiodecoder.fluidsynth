@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="audiodecoder.fluidsynth"
-  version="2.0.0"
+  version="2.1.0"
   name="FluidSynth MIDI Audio Decoder"
   provider-name="spiff">
   <requires>@ADDON_DEPENDS@</requires>
   <extension
     point="kodi.audiodecoder"
     name="fluid"
+    tags="true"
     extension=".mid|.kar"
     library_@PLATFORM@="@LIBRARY_FILENAME@"/>
   <extension point="xbmc.addon.metadata">
-    <summary lang="en">FluidSynth MIDI Audio Decoder</summary>
-    <description lang="en">FluidSynth MIDI Audio Decoder</description>
+    <summary lang="en">A SoundFont Synthesizer</summary>
+    <description lang="en">FluidSynth is a real-time software synthesizer based on the SoundFont 2 specifications and has reached widespread distribution. FluidSynth itself does not have a graphical user interface, but due to its powerful API several applications utilize it and it has even found its way onto embedded systems and is used in some mobile apps.</description>
     <platform>@PLATFORM@</platform>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
   </extension>
 </addon>
