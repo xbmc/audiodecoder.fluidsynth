@@ -56,7 +56,7 @@ public:
   {
     if (m_soundfont.empty() || m_soundfont == "OFF")
     {
-      kodi::gui::dialogs::OK::ShowAndGetInput("Soundfont not configured", "Check add-on settings");
+      kodi::QueueNotification(QUEUE_ERROR, kodi::GetLocalizedString(30010), kodi::GetLocalizedString(30011));
       return false;
     }
     kodi::vfs::CFile file;
