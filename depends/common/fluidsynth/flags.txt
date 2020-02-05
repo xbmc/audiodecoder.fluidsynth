@@ -1,1 +1,1 @@
--DLIB_SUFFIX=
+-DLIB_SUFFIX= -Denable-sdl2=0

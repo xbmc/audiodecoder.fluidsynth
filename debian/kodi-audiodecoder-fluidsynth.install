@@ -1,3 +1,3 @@
-usr/lib
-usr/share
+usr/lib/*
+usr/share/*
 
