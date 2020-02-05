@@ -3,7 +3,6 @@
 This is a [Kodi](http://kodi.tv) audio decoder addon for midi files.
 
 [![Build Status](https://travis-ci.org/xbmc/audiodecoder.fluidsynth.svg?branch=master)](https://travis-ci.org/xbmc/audiodecoder.fluidsynth)
-[![Build Status](https://ci.appveyor.com/api/projects/status/github/xbmc/audiodecoder.fluidsynth?svg=true)](https://ci.appveyor.com/project/xbmc/audiodecoder-fluidsynth)
 
 ## Build instructions
 
