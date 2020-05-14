@@ -15,7 +15,7 @@
     <summary lang="en">A SoundFont Synthesizer</summary>
     <description lang="en">FluidSynth is a real-time software synthesizer based on the SoundFont 2 specifications and has reached widespread distribution. FluidSynth itself does not have a graphical user interface, but due to its powerful API several applications utilize it and it has even found its way onto embedded systems and is used in some mobile apps.</description>
     <platform>@PLATFORM@</platform>
-    <license>GPL-2.0</license>
+    <license>GPL-2.0-or-later</license>
     <source>https://github.com/xbmc/audiodecoder.fluidsynth</source>
     <assets>
       <icon>resources/icon.png</icon>
