@@ -22,8 +22,8 @@ struct FluidContext
 class ATTRIBUTE_HIDDEN CFluidCodec : public kodi::addon::CInstanceAudioDecoder
 {
 public:
-  CFluidCodec(KODI_HANDLE instance) :
-    CInstanceAudioDecoder(instance)
+  CFluidCodec(KODI_HANDLE instance, const std::string& version) :
+    CInstanceAudioDecoder(instance, version)
   {
     m_soundfont = kodi::GetSettingString("soundfont");
   }
@@ -206,9 +206,9 @@ class ATTRIBUTE_HIDDEN CMyAddon : public kodi::addon::CAddonBase
 {
 public:
   CMyAddon() = default;
-  ADDON_STATUS CreateInstance(int instanceType, std::string instanceID, KODI_HANDLE instance, KODI_HANDLE& addonInstance) override
+  ADDON_STATUS CreateInstance(int instanceType, const std::string& instanceID, KODI_HANDLE instance, const std::string& version, KODI_HANDLE& addonInstance) override
   {
-    addonInstance = new CFluidCodec(instance);
+    addonInstance = new CFluidCodec(instance, version);
     return ADDON_STATUS_OK;
   }
   ~CMyAddon() = default;
