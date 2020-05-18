@@ -1,21 +1,9 @@
 /*
- *      Copyright (C) 2014-2020 Arne Morten Kvarving
- *      Copyright (C) 2016-2020 Team Kodi
+ *  Copyright (C) 2014-2020 Arne Morten Kvarving
+ *  Copyright (C) 2016-2020 Team Kodi (https://kodi.tv)
  *
- *  This Program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2, or (at your option)
- *  any later version.
- *
- *  This Program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with XBMC; see the file COPYING.  If not, see
- *  <http://www.gnu.org/licenses/>.
- *
+ *  SPDX-License-Identifier: GPL-2.0-or-later
+ *  See LICENSE.md for more information.
  */
 
 #include <kodi/addon-instance/AudioDecoder.h>
@@ -34,8 +22,8 @@ struct FluidContext
 class ATTRIBUTE_HIDDEN CFluidCodec : public kodi::addon::CInstanceAudioDecoder
 {
 public:
-  CFluidCodec(KODI_HANDLE instance) :
-    CInstanceAudioDecoder(instance)
+  CFluidCodec(KODI_HANDLE instance, const std::string& version) :
+    CInstanceAudioDecoder(instance, version)
   {
     m_soundfont = kodi::GetSettingString("soundfont");
   }
@@ -218,9 +206,9 @@ class ATTRIBUTE_HIDDEN CMyAddon : public kodi::addon::CAddonBase
 {
 public:
   CMyAddon() = default;
-  ADDON_STATUS CreateInstance(int instanceType, std::string instanceID, KODI_HANDLE instance, KODI_HANDLE& addonInstance) override
+  ADDON_STATUS CreateInstance(int instanceType, const std::string& instanceID, KODI_HANDLE instance, const std::string& version, KODI_HANDLE& addonInstance) override
   {
-    addonInstance = new CFluidCodec(instance);
+    addonInstance = new CFluidCodec(instance, version);
     return ADDON_STATUS_OK;
   }
   ~CMyAddon() = default;
