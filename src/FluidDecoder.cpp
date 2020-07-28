@@ -41,8 +41,8 @@ public:
   bool Init(const std::string& filename, unsigned int filecache,
             int& channels, int& samplerate,
             int& bitspersample, int64_t& totaltime,
-            int& bitrate, AEDataFormat& format,
-            std::vector<AEChannel>& channellist) override
+            int& bitrate, AudioEngineDataFormat& format,
+            std::vector<AudioEngineChannel>& channellist) override
   {
     if (m_soundfont.empty() || m_soundfont == "OFF")
     {
@@ -65,8 +65,8 @@ public:
     fluid_player_add_mem(ctx.player, temp, size);
     delete[] temp;
     fluid_player_play(ctx.player);
-    format = AE_FMT_FLOAT;
-    channellist = { AE_CH_FL, AE_CH_FR };
+    format = AUDIOENGINE_FMT_FLOAT;
+    channellist = { AUDIOENGINE_CH_FL, AUDIOENGINE_CH_FR };
     channels = 2;
 
     bitspersample = 32;
@@ -107,8 +107,7 @@ public:
 #define MIDI_TIMESIGNATURE 0xFF58
 #define MIDI_END_OF_TRACK 0xFF2F
 
-  bool ReadTag(const std::string& filename, std::string& title,
-               std::string& artist, int& length) override
+  bool ReadTag(const std::string& filename, kodi::addon::AudioDecoderInfoTag& tag) override
   {
     if (!kodi::GetSettingBoolean("scantext"))
       return false;
@@ -134,6 +133,7 @@ public:
 
     unsigned int trackNameCnt = 0;
     std::string firstTextEvent;
+    std::string title;
     while (ptr < len)
     {
       uint32_t trackHeader = data[ptr+3] | data[ptr+2] << 8 | data[ptr+1] << 16 | data[ptr] << 24;
@@ -191,7 +191,8 @@ public:
     if (trackNameCnt > 3)
       title = firstTextEvent;
 
-    length = -1;
+    tag.SetTitle(title);
+    tag.SetDuration(-1);
     delete[] data;
     return true;
   }
