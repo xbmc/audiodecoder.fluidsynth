@@ -13,10 +13,7 @@
 	dh $@ --parallel
 
 override_dh_auto_configure:
-	dh_auto_configure -- -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=1 -DUSE_LTO=1 -DSOUND_FONT=/usr/share/sounds/sf2/FluidR3_GM.sf2
-
-override_dh_strip:
-	dh_strip --dbg-package=kodi-audiodecoder-fluidsynth-dbg
+	dh_auto_configure -- -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_SHARED_LIBS=1 -DUSE_LTO=1
 
 override_dh_installdocs:
 	dh_installdocs --link-doc=kodi-audiodecoder-fluidsynth

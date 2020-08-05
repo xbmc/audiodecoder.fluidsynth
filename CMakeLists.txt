@@ -12,6 +12,7 @@ include_directories(${KODI_INCLUDE_DIR}/..
                     ${FLUIDSYNTH_INCLUDE_DIRS})
 
 set(FLUID_SOURCES src/FluidDecoder.cpp)
+set(FLUID_HEADERS src/FluidDecoder.h)
 
 set(DEPLIBS ${FLUIDSYNTH_LIBRARIES})
 
