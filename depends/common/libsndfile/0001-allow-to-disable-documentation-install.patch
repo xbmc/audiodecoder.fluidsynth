@@ -1,0 +1,83 @@
+From: Alwin Esch <alwin.esch@web.de>
+Date: Wed, 14 Apr 2021 00:31:30 +0200
+Subject: [PATCH] allow to disable documentation install
+
+---
+ CMakeLists.txt | 53 ++++++++++++++++++++++++++------------------------
+ 1 file changed, 28 insertions(+), 25 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index de98145..5ebbfc9 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -55,6 +55,7 @@ option (BUILD_PROGRAMS "Build programs" ON)
+ option (BUILD_EXAMPLES "Build examples" ON)
+ option (ENABLE_CPACK "Enable CPack support" ON)
+ option (ENABLE_EXPERIMENTAL "Enable experimental code" OFF)
++option (ENABLE_DOCS "Enable documentation install" OFF)
+ option (ENABLE_BOW_DOCS "Enable black-on-white html docs" OFF)
+ if (MSVC AND (DEFINED ENABLE_STATIC_RUNTIME))
+ 	option (ENABLE_STATIC_RUNTIME "Enable static runtime" ${ENABLE_STATIC_RUNTIME})
+@@ -769,32 +770,34 @@ if (INSTALL_MANPAGES)
+ 	install (FILES man/sndfile-interleave.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1 RENAME sndfile-deinterleave.1)
+ endif ()
+ 
+-if (ENABLE_BOW_DOCS)
+-	set (HTML_BGCOLOUR "white")
+-	set (HTML_FGCOLOUR "black")
+-else ()
+-	set (HTML_BGCOLOUR "black")
+-	set (HTML_FGCOLOUR "white")
++if (ENABLE_DOCS)
++	if (ENABLE_BOW_DOCS)
++		set (HTML_BGCOLOUR "white")
++		set (HTML_FGCOLOUR "black")
++	else ()
++		set (HTML_BGCOLOUR "black")
++		set (HTML_FGCOLOUR "white")
++	endif ()
++	set (dist_doc_DATA
++		docs/index.md
++		docs/libsndfile.jpg
++		docs/libsndfile.css
++		docs/print.css
++		docs/api.md
++		docs/command.md
++		docs/bugs.md
++		docs/formats.md
++		docs/sndfile_info.md
++		docs/new_file_type_howto.md
++		docs/win32.md
++		docs/FAQ.md
++		docs/lists.md
++		docs/embedded_files.md
++		docs/octave.md
++		docs/tutorial.md
++		)
++	install (FILES ${dist_doc_DATA} DESTINATION ${CMAKE_INSTALL_DOCDIR})
+ endif ()
+-set (dist_doc_DATA
+-	docs/index.md
+-	docs/libsndfile.jpg
+-	docs/libsndfile.css
+-	docs/print.css
+-	docs/api.md
+-	docs/command.md
+-	docs/bugs.md
+-	docs/formats.md
+-	docs/sndfile_info.md
+-	docs/new_file_type_howto.md
+-	docs/win32.md
+-	docs/FAQ.md
+-	docs/lists.md
+-	docs/embedded_files.md
+-	docs/octave.md
+-	docs/tutorial.md
+-	)
+-install (FILES ${dist_doc_DATA} DESTINATION ${CMAKE_INSTALL_DOCDIR})
+ 
+ if (INSTALL_PKGCONFIG_MODULE)
+ 	install (FILES ${CMAKE_CURRENT_BINARY_DIR}/sndfile.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+-- 
+2.25.1
+
