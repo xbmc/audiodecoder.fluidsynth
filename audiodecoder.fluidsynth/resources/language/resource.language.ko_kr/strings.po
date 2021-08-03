@@ -5,25 +5,25 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Addons\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/audiodecoder.fluidsynth/issues/"
-"\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-08-03 12:29+0000\n"
+"Last-Translator: Joe Baek <aalive1@gmail.com>\n"
+"Language-Team: Korean <https://kodi.weblate.cloud/projects/kodi-add-ons-audio-decodersencoders/audiodecoder-fluidsynth/ko_kr/>\n"
 "Language: ko_kr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.7.2\n"
 
 msgctxt "Addon Summary"
 msgid "A SoundFont Synthesizer"
-msgstr ""
+msgstr "SoundFont 신시사이저"
 
 msgctxt "Addon Description"
 msgid "FluidSynth is a real-time software synthesizer based on the SoundFont 2 specifications and has reached widespread distribution. FluidSynth itself does not have a graphical user interface, but due to its powerful API several applications utilize it and it has even found its way onto embedded systems and is used in some mobile apps."
-msgstr ""
+msgstr "FluidSynth는 SoundFont 2 규격에 따른 실시간 신시사이저 소프트웨어로서 널리 보급되어 있습니다. FluidSynth 자체에는 GUI가 없지만, 강력한 API 덕분에 여러개의 어플리케이션에서 사용 중이며 심지어 임베디드 시스템이나 모바일 앱에서도 사용 중입니다."
 
 #[Consistency] Make terms, settings names, brands and other minutiae, consistent throughout file.
 #[Capitalization] Avoid capitalizing every second word. See http://grammarist.com/capitalization/
@@ -42,16 +42,16 @@ msgstr ""
 
 msgctxt "#30002"
 msgid "Scan MIDI for title"
-msgstr ""
+msgstr "제목을 찾아 MIDI 검색"
 
 msgctxt "#30003"
 msgid "Search in MIDI file for information to get an exact title."
-msgstr ""
+msgstr "추가 제목 정보를 얻기위해 MIDI 파일을 검색."
 
 msgctxt "#30010"
 msgid "SoundFont audio decode"
-msgstr ""
+msgstr "SoundFont 오디오 복호화"
 
 msgctxt "#30011"
 msgid "Soundfont not configured, check add-on settings."
-msgstr ""
+msgstr "SoundFont가 설정되지 않음, 애드온 설정을 확인하세요."
