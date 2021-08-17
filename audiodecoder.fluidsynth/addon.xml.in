@@ -24,6 +24,7 @@
     <summary lang="en_GB">A SoundFont Synthesizer</summary>
     <summary lang="es_ES">Un Sintetizador SoundFont</summary>
     <summary lang="ko_KR">SoundFont 신시사이저</summary>
+    <summary lang="nl_NL">Een Geluidsfont synthesizer</summary>
     <summary lang="pl_PL">Syntezator SoundFont</summary>
     <summary lang="ru_RU">SoundFont синтезатор</summary>
     <description lang="da_DK">FluidSynth er en software-synthesizer i realtid baseret på SoundFont 2-specifikationerne og har nået en bred distribution. FluidSynth har ikke selv en grafisk brugerflade, men på grund af sin kraftige API benytter flere applikationer sig af den, og den har endda fundet vej til integrerede systemer og bruges i nogle mobile apps.</description>
