@@ -5,21 +5,22 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR})
 
 find_package(Kodi REQUIRED)
 find_package(FluidSynth REQUIRED)
+find_package(LibSndFile REQUIRED)
 
 include(ExternalProject)
 
 include_directories(${KODI_INCLUDE_DIR}/..
-                    ${FLUIDSYNTH_INCLUDE_DIRS})
+                    ${FLUIDSYNTH_INCLUDE_DIRS}
+                    ${LIBSNDFILE_INCLUDE_DIRS})
 
 set(FLUID_SOURCES src/FluidDecoder.cpp)
 set(FLUID_HEADERS src/FluidDecoder.h)
 
-set(DEPLIBS ${FLUIDSYNTH_LIBRARIES})
+set(DEPLIBS ${FLUIDSYNTH_LIBRARIES} ${LIBSNDFILE_LIBRARIES} gomp)
 
 # the cmake var SOUND_FONT can be used to set a platform specific default sound font
 # e.g. -DSOUND_FONT=/path/to/some_sound_font.sf2
 option(SOUND_FONT "Default sound font" "")
-
 
 build_addon(audiodecoder.fluidsynth FLUID DEPLIBS)
 

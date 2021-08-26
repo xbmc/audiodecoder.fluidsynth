@@ -6,7 +6,7 @@
           <default>"@SOUND_FONT@"</default>
           <constraints>
             <allowempty>true</allowempty>
-            <masking>.sf2</masking>
+            <masking>.sf2|.sf3</masking>
           </constraints>
           <control type="button" format="file"/>
         </setting>

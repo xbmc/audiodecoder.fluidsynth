@@ -3,7 +3,7 @@ Upstream-Name: audiodecoder.fluidsynth
 
 Files: *
 Copyright: Arne Morten Kvarving <arne.morten.kvarving@sintef.no>
-           2016-2020 Team Kodi
+           2016-2021 Team Kodi
 License: GPL-2+
  This package is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ License: GPL-2+
 Files: debian/*
 Copyright: 2013 Arne Morten Kvarving <arne.morten.kvarving@sintef.no>
            2016 wsnipex <wsnipex@a1.net>
-           2016-2020 Team Kodi
+           2016-2021 Team Kodi
 License: GPL-2+
  This package is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
