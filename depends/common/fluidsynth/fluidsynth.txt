@@ -1,1 +1,1 @@
-fluidsynth https://github.com/FluidSynth/fluidsynth/archive/v2.1.4.tar.gz
+fluidsynth https://github.com/FluidSynth/fluidsynth/archive/refs/tags/v2.2.2.tar.gz
