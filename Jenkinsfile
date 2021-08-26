@@ -1,1 +1,1 @@
-buildPlugin(version: "Matrix", platforms: ['ubuntu-ppa'])
+buildPlugin(version: "Nexus", platforms: ['ubuntu-ppa'])
