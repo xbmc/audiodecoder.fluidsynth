@@ -3,6 +3,7 @@
 This is a [Kodi](https://kodi.tv) audio decoder addon for midi files.
 
 [![License: GPL-2.0-or-later](https://img.shields.io/badge/License-GPL%20v2+-blue.svg)](LICENSE.md)
+[![Build and run tests](https://github.com/xbmc/audiodecoder.fluidsynth/actions/workflows/build.yml/badge.svg?branch=Nexus)](https://github.com/xbmc/audiodecoder.fluidsynth/actions/workflows/build.yml)
 
 ## Build instructions
 
