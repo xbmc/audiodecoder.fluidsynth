@@ -55,3 +55,15 @@ msgstr ""
 msgctxt "#30011"
 msgid "Soundfont not configured, check add-on settings."
 msgstr ""
+
+#. Supported file extension description about ".mid"
+#: audiodecoder.fluidsynth/addon.xml.in
+msgctxt "#30100"
+msgid "Is a MIDI (Musical Instrument Digital Interface) file used by music authoring, mixing programs and hardware devices."
+msgstr ""
+
+#. Supported file extension description about ".kar"
+#: audiodecoder.fluidsynth/addon.xml.in
+msgctxt "#30101"
+msgid "Karaoke MIDI File - Contains MIDI data as well as song lyrics stored in text."
+msgstr ""
