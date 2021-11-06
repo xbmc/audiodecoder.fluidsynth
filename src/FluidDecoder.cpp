@@ -72,14 +72,14 @@ bool CFluidCodec::Init(const std::string& filename,
   return true;
 }
 
-int CFluidCodec::ReadPCM(uint8_t* buffer, int size, int& actualsize)
+int CFluidCodec::ReadPCM(uint8_t* buffer, size_t size, size_t& actualsize)
 {
   if (fluid_player_get_status(ctx.player) == FLUID_PLAYER_DONE)
-    return 1;
+    return AUDIODECODER_READ_EOF;
 
   fluid_synth_write_float(ctx.synth, size / 8, buffer, 0, 2, buffer, 1, 2);
   actualsize = size;
-  return 0;
+  return AUDIODECODER_READ_SUCCESS;
 }
 
 bool CFluidCodec::ReadTag(const std::string& filename, kodi::addon::AudioDecoderInfoTag& tag)
@@ -177,7 +177,7 @@ bool CFluidCodec::ReadTag(const std::string& filename, kodi::addon::AudioDecoder
 
 //------------------------------------------------------------------------------
 
-class ATTRIBUTE_HIDDEN CMyAddon : public kodi::addon::CAddonBase
+class ATTR_DLL_LOCAL CMyAddon : public kodi::addon::CAddonBase
 {
 public:
   CMyAddon() = default;

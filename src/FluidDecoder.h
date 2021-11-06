@@ -32,7 +32,7 @@ struct FluidContext
   fluid_player_t* player = nullptr;
 };
 
-class ATTRIBUTE_HIDDEN CFluidCodec : public kodi::addon::CInstanceAudioDecoder
+class ATTR_DLL_LOCAL CFluidCodec : public kodi::addon::CInstanceAudioDecoder
 {
 public:
   CFluidCodec(KODI_HANDLE instance, const std::string& version);
@@ -47,7 +47,7 @@ public:
             int& bitrate,
             AudioEngineDataFormat& format,
             std::vector<AudioEngineChannel>& channellist) override;
-  int ReadPCM(uint8_t* buffer, int size, int& actualsize) override;
+  int ReadPCM(uint8_t* buffer, size_t size, size_t& actualsize) override;
   int64_t Seek(int64_t time) override { return -1; }
   bool ReadTag(const std::string& filename, kodi::addon::AudioDecoderInfoTag& tag) override;
 

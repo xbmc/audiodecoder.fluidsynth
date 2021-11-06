@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="audiodecoder.fluidsynth"
-  version="20.0.1"
+  version="20.1.0"
   name="FluidSynth MIDI Audio Decoder"
   provider-name="spiff">
   <requires>@ADDON_DEPENDS@</requires>
@@ -9,8 +9,16 @@
     point="kodi.audiodecoder"
     name="fluid"
     tags="true"
-    extension=".mid|.kar"
-    library_@PLATFORM@="@LIBRARY_FILENAME@"/>
+    library_@PLATFORM@="@LIBRARY_FILENAME@">
+    <support>
+      <extension name=".mid">
+        <description>30100</description>
+      </extension>
+      <extension name=".kar">
+        <description>30101</description>
+      </extension>
+    </support>
+  </extension>
   <extension point="xbmc.addon.metadata">
     <platform>@PLATFORM@</platform>
     <license>GPL-2.0-or-later</license>
@@ -27,6 +35,7 @@
     <summary lang="nl_NL">Een Geluidsfont synthesizer</summary>
     <summary lang="pl_PL">Syntezator SoundFont</summary>
     <summary lang="ru_RU">SoundFont синтезатор</summary>
+    <summary lang="zh_CN">一个音色库合成器</summary>
     <description lang="da_DK">FluidSynth er en software-synthesizer i realtid baseret på SoundFont 2-specifikationerne og har nået en bred distribution. FluidSynth har ikke selv en grafisk brugerflade, men på grund af sin kraftige API benytter flere applikationer sig af den, og den har endda fundet vej til integrerede systemer og bruges i nogle mobile apps.</description>
     <description lang="de_DE">FluidSynth ist ein Echtzeit-Software-Synthesizer, der auf den SoundFont 2-Spezifikationen basiert und eine weit verbreitete Verbreitung erreicht hat. FluidSynth selbst verfügt nicht über eine grafische Benutzeroberfläche, wird jedoch aufgrund seiner leistungsstarken API von mehreren Anwendungen verwendet und hat sogar den Weg in eingebettete Systeme gefunden und wird in einigen mobilen Apps verwendet.</description>
     <description lang="en_GB">FluidSynth is a real-time software synthesizer based on the SoundFont 2 specifications and has reached widespread distribution. FluidSynth itself does not have a graphical user interface, but due to its powerful API several applications utilize it and it has even found its way onto embedded systems and is used in some mobile apps.</description>
@@ -34,5 +43,6 @@
     <description lang="ko_KR">FluidSynth는 SoundFont 2 규격에 따른 실시간 신시사이저 소프트웨어로서 널리 보급되어 있습니다. FluidSynth 자체에는 GUI가 없지만, 강력한 API 덕분에 여러개의 어플리케이션에서 사용 중이며 심지어 임베디드 시스템이나 모바일 앱에서도 사용 중입니다.</description>
     <description lang="pl_PL">FluidSynth to programowy syntezator czasu rzeczywistego oparty na specyfikacjach SoundFont 2, który jest szeroko rozpowszechniony. Sam FluidSynth nie ma graficznego interfejsu użytkownika, ale ze względu na jego potężne API korzysta z niego kilka aplikacji, a nawet znalazł się w systemach wbudowanych i jest używany w niektórych aplikacjach mobilnych.</description>
     <description lang="ru_RU">FluidSynth - это программный синтезатор реального времени, основанный на спецификации SoundFont 2 и получивший широкое распространение. Сам FluidSynth не имеет графического интерфейса, но благодаря мощному API его используют различные приложения, он также нашёл свое применение во встроенных системах и используется в некоторых мобильных приложениях.</description>
+    <description lang="zh_CN">FluidSynth 是一款已广泛发行的基于 SoundFont 2 规范的实时软件合成器。FluidSynth 本身没有图形用户界面，但因其强大的 API 而被一些应用程序所使用，甚至找到了在在嵌入式系统上使用的方法，并在一些移动应用程序中使用。</description>
   </extension>
 </addon>
