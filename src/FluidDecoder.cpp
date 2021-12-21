@@ -11,10 +11,10 @@
 #include <kodi/Filesystem.h>
 #include <kodi/General.h>
 
-CFluidCodec::CFluidCodec(KODI_HANDLE instance, const std::string& version)
-  : CInstanceAudioDecoder(instance, version)
+CFluidCodec::CFluidCodec(const kodi::addon::IInstanceInfo& instance)
+  : CInstanceAudioDecoder(instance)
 {
-  m_soundfont = kodi::GetSettingString("soundfont");
+  m_soundfont = kodi::addon::GetSettingString("soundfont");
 }
 
 CFluidCodec::~CFluidCodec()
@@ -39,8 +39,8 @@ bool CFluidCodec::Init(const std::string& filename,
 {
   if (m_soundfont.empty() || m_soundfont == "OFF")
   {
-    kodi::QueueNotification(QUEUE_ERROR, kodi::GetLocalizedString(30010),
-                            kodi::GetLocalizedString(30011));
+    kodi::QueueNotification(QUEUE_ERROR, kodi::addon::GetLocalizedString(30010),
+                            kodi::addon::GetLocalizedString(30011));
     return false;
   }
   kodi::vfs::CFile file;
@@ -84,7 +84,7 @@ int CFluidCodec::ReadPCM(uint8_t* buffer, size_t size, size_t& actualsize)
 
 bool CFluidCodec::ReadTag(const std::string& filename, kodi::addon::AudioDecoderInfoTag& tag)
 {
-  if (!kodi::GetSettingBoolean("scantext"))
+  if (!kodi::addon::GetSettingBoolean("scantext"))
     return false;
 
   kodi::vfs::CFile file;
@@ -181,13 +181,10 @@ class ATTR_DLL_LOCAL CMyAddon : public kodi::addon::CAddonBase
 {
 public:
   CMyAddon() = default;
-  ADDON_STATUS CreateInstance(int instanceType,
-                              const std::string& instanceID,
-                              KODI_HANDLE instance,
-                              const std::string& version,
-                              KODI_HANDLE& addonInstance) override
+  ADDON_STATUS CreateInstance(const kodi::addon::IInstanceInfo& instance,
+                              KODI_ADDON_INSTANCE_HDL& hdl) override
   {
-    addonInstance = new CFluidCodec(instance, version);
+    hdl = new CFluidCodec(instance);
     return ADDON_STATUS_OK;
   }
   ~CMyAddon() = default;
