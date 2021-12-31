@@ -35,7 +35,7 @@ struct FluidContext
 class ATTR_DLL_LOCAL CFluidCodec : public kodi::addon::CInstanceAudioDecoder
 {
 public:
-  CFluidCodec(KODI_HANDLE instance, const std::string& version);
+  CFluidCodec(const kodi::addon::IInstanceInfo& instance);
   ~CFluidCodec() override;
 
   bool Init(const std::string& filename,
