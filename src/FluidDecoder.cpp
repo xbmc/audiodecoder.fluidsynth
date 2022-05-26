@@ -53,7 +53,7 @@ bool CFluidCodec::Init(const std::string& filename,
   ctx.player = new_fluid_player(ctx.synth);
 
   size_t size = file.GetLength();
-  char* temp = new char[size];
+  uint8_t* temp = new uint8_t[size];
   file.Read(temp, size);
   file.Close();
   fluid_player_add_mem(ctx.player, temp, size);
