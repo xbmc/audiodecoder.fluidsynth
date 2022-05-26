@@ -1,1 +1,1 @@
-libsndfile https://github.com/libsndfile/libsndfile/archive/refs/tags/1.0.31.tar.gz
+libsndfile https://github.com/libsndfile/libsndfile/releases/download/1.1.0/libsndfile-1.1.0.tar.xz
