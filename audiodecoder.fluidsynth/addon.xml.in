@@ -19,6 +19,7 @@
       <icon>resources/icon.png</icon>
       <fanart>resources/fanart.jpg</fanart>
     </assets>
+    <summary lang="ca_ES">Un sintetitzador SoundFont</summary>
     <summary lang="da_DK">En lydskrifttype synthesizer</summary>
     <summary lang="de_DE">Ein SoundFont-Synthesizer</summary>
     <summary lang="en_GB">A SoundFont Synthesizer</summary>
@@ -30,6 +31,7 @@
     <summary lang="pl_PL">Syntezator SoundFont</summary>
     <summary lang="ru_RU">SoundFont синтезатор</summary>
     <summary lang="zh_CN">一个音色库合成器</summary>
+    <description lang="ca_ES">FluidSynth és un sintetitzador de programari en temps real basat en les especificacions de SoundFont 2 i ha arribat a una distribució àmplia. FluidSynth en si no té una interfície gràfica d&apos;usuari, però a causa de la seva potent API diverses aplicacions l&apos;utilitzen i fins i tot ha trobat el seu camí en sistemes incrustats i s&apos;utilitza en algunes aplicacions mòbils.</description>
     <description lang="da_DK">FluidSynth er en software-synthesizer i realtid baseret på SoundFont 2-specifikationerne og har nået en bred distribution. FluidSynth har ikke selv en grafisk brugerflade, men på grund af sin kraftige API benytter flere applikationer sig af den, og den har endda fundet vej til integrerede systemer og bruges i nogle mobile apps.</description>
     <description lang="de_DE">FluidSynth ist ein Echtzeit-Software-Synthesizer, der auf den SoundFont 2-Spezifikationen basiert und eine weit verbreitete Verbreitung erreicht hat. FluidSynth selbst verfügt nicht über eine grafische Benutzeroberfläche, wird jedoch aufgrund seiner leistungsstarken API von mehreren Anwendungen verwendet und hat sogar den Weg in eingebettete Systeme gefunden und wird in einigen mobilen Apps verwendet.</description>
     <description lang="en_GB">FluidSynth is a real-time software synthesizer based on the SoundFont 2 specifications and has reached widespread distribution. FluidSynth itself does not have a graphical user interface, but due to its powerful API several applications utilize it and it has even found its way onto embedded systems and is used in some mobile apps.</description>
