@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Addons\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2022-12-22 15:20+0000\n"
+"PO-Revision-Date: 2023-01-01 15:15+0000\n"
 "Last-Translator: skypichat <skypichat@hotmail.fr>\n"
 "Language-Team: French (France) <https://kodi.weblate.cloud/projects/kodi-add-ons-audio-decodersencoders/audiodecoder-fluidsynth/fr_fr/>\n"
 "Language: fr_fr\n"
@@ -34,7 +34,7 @@ msgstr "FluidSynth est un synthétiseur logiciel en temps réel basé sur les sp
 #For example, "Press \"OK\" for \"All seasons\"" instead of "Press OK for All seasons" after first word.
 msgctxt "#30000"
 msgid "Soundfont"
-msgstr "Soundfont"
+msgstr "Police sonore"
 
 msgctxt "#30001"
 msgid "To use FluidSynth you need a working sound font."
@@ -50,8 +50,8 @@ msgstr "Rechercher dans le fichier MIDI des informations pour obtenir un titre e
 
 msgctxt "#30010"
 msgid "SoundFont audio decode"
-msgstr "Décodage audio SoundFont"
+msgstr "Décodage audio de la police sonore"
 
 msgctxt "#30011"
 msgid "Soundfont not configured, check add-on settings."
-msgstr "Soundfont non configuré, vérifier les paramètres du module complémentaire."
+msgstr "Police sonore non configurée, vérifier les paramètres du module complémentaire."
