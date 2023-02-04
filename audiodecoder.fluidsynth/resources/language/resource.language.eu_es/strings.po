@@ -5,25 +5,25 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Addons\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/audiodecoder.fluidsynth/issues/"
-"\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-01-31 15:15+0000\n"
+"Last-Translator: Aitor Salaberria <trslbrr@gmail.com>\n"
+"Language-Team: Basque (Spain) <https://kodi.weblate.cloud/projects/kodi-add-ons-audio-decodersencoders/audiodecoder-fluidsynth/eu_es/>\n"
 "Language: eu_es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.15.2\n"
 
 msgctxt "Addon Summary"
 msgid "A SoundFont Synthesizer"
-msgstr ""
+msgstr "SoundFonten sintetizadore bat"
 
 msgctxt "Addon Description"
 msgid "FluidSynth is a real-time software synthesizer based on the SoundFont 2 specifications and has reached widespread distribution. FluidSynth itself does not have a graphical user interface, but due to its powerful API several applications utilize it and it has even found its way onto embedded systems and is used in some mobile apps."
-msgstr ""
+msgstr "FluidSynth denbora errealeko software-sintetizadore bat da, FluidSynth 2ko zehaztapenetan oinarritua eta arrakasta handikoa. FluidSynth berak ez du erabiltzaileari zuzendutako interfaze grafikorik, baina, bere API boteretsua dela eta, aplikazio ugarik erabiltzen dute. Sistema txertatuetan aurkitu du bere bidea, baita mugikorretako aplikazioetan ere."
 
 #[Consistency] Make terms, settings names, brands and other minutiae, consistent throughout file.
 #[Capitalization] Avoid capitalizing every second word. See http://grammarist.com/capitalization/
@@ -34,24 +34,24 @@ msgstr ""
 #For example, "Press \"OK\" for \"All seasons\"" instead of "Press OK for All seasons" after first word.
 msgctxt "#30000"
 msgid "Soundfont"
-msgstr ""
+msgstr "SoundFont"
 
 msgctxt "#30001"
 msgid "To use FluidSynth you need a working sound font."
-msgstr ""
+msgstr "FluidSynth erabiltzeko, dabilen SoundFont fitxategi bat behar duzu."
 
 msgctxt "#30002"
 msgid "Scan MIDI for title"
-msgstr ""
+msgstr "MIDI eskaneatu izenburuaren arabera"
 
 msgctxt "#30003"
 msgid "Search in MIDI file for information to get an exact title."
-msgstr ""
+msgstr "MIDI fitxategian izenburu zehatza eskura ahal izateko informazioa bilatu."
 
 msgctxt "#30010"
 msgid "SoundFont audio decode"
-msgstr ""
+msgstr "SoundFont audioa deskodetu"
 
 msgctxt "#30011"
 msgid "Soundfont not configured, check add-on settings."
-msgstr ""
+msgstr "SoundFont ez dago konfiguratua, gehigarrien ezarpenak berrikusi."
