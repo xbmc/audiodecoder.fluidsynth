@@ -11,6 +11,8 @@
 #include <kodi/Filesystem.h>
 #include <kodi/General.h>
 
+#include <new>
+
 CFluidCodec::CFluidCodec(const kodi::addon::IInstanceInfo& instance)
   : CInstanceAudioDecoder(instance)
 {
@@ -52,11 +54,23 @@ bool CFluidCodec::Init(const std::string& filename,
   fluid_synth_sfload(ctx.synth, m_soundfont.c_str(), 1);
   ctx.player = new_fluid_player(ctx.synth);
 
-  size_t size = file.GetLength();
-  uint8_t* temp = new uint8_t[size];
-  file.Read(temp, size);
+  const int64_t size = file.GetLength();
+  if (size <= 0)
+    return false;
+
+  uint8_t* temp = new (std::nothrow) uint8_t[size];
+  if (!temp)
+    return false;
+
+  const int64_t len = file.Read(temp, size);
   file.Close();
-  fluid_player_add_mem(ctx.player, temp, size);
+  if (len <= 0)
+  {
+    delete[] temp;
+    return false;
+  }
+
+  fluid_player_add_mem(ctx.player, temp, len);
   delete[] temp;
   fluid_player_play(ctx.player);
   format = AUDIOENGINE_FMT_FLOAT;
@@ -91,41 +105,60 @@ bool CFluidCodec::ReadTag(const std::string& filename, kodi::addon::AudioDecoder
   if (!file.OpenFile(filename))
     return false;
 
-  int len = file.GetLength();
-  uint8_t* data = new uint8_t[len];
+  const int64_t size = file.GetLength();
+  if (size < 14)
+    return false;
+
+  uint8_t* data = new (std::nothrow) uint8_t[size];
   if (!data)
     return false;
 
-  file.Read(data, len);
-
-  uint32_t header = data[3] | data[2] << 8 | data[1] << 16 | data[0] << 24;
-  uint32_t headerLength = data[7] | data[6] << 8 | data[5] << 16 | data[4] << 24;
-  if (header != MIDI_HEADER || headerLength != 6)
+  const int64_t len = file.Read(data, size);
+  if (len < 14)
+  {
+    delete[] data;
     return false;
+  }
+
+  uint32_t header = data[3] | data[2] << 8 | data[1] << 16 |
+                    static_cast<uint32_t>(data[0]) << 24;
+  uint32_t headerLength = data[7] | data[6] << 8 | data[5] << 16 |
+                          static_cast<uint32_t>(data[4]) << 24;
+  if (header != MIDI_HEADER || headerLength != 6)
+  {
+    delete[] data;
+    return false;
+  }
 
   std::vector<int> trackDataFormats;
-  unsigned int ptr = 14;
+  int64_t ptr = 14;
 
   unsigned int trackNameCnt = 0;
   std::string firstTextEvent;
   std::string title;
-  while (ptr < len)
+  while (ptr + 8 <= len)
   {
-    uint32_t trackHeader =
-        data[ptr + 3] | data[ptr + 2] << 8 | data[ptr + 1] << 16 | data[ptr] << 24;
-    int32_t trackHeaderLength =
-        data[ptr + 7] | data[ptr + 6] << 8 | data[ptr + 5] << 16 | data[ptr + 4] << 24;
+    uint32_t trackHeader = data[ptr + 3] | data[ptr + 2] << 8 | data[ptr + 1] << 16 |
+                           static_cast<uint32_t>(data[ptr]) << 24;
+    uint32_t trackHeaderLength = data[ptr + 7] | data[ptr + 6] << 8 | data[ptr + 5] << 16 |
+                                 static_cast<uint32_t>(data[ptr + 4]) << 24;
 
     if (trackHeader != MIDI_MTrk)
       break;
 
-    unsigned int blockPtr = 0;
-    while (blockPtr < trackHeaderLength)
+    int64_t blockPtr = 0;
+    while (blockPtr < trackHeaderLength && ptr + blockPtr + 12 <= len)
     {
       uint32_t blockIdentifier = data[blockPtr + ptr + 10] | data[blockPtr + ptr + 9] << 8 |
                                  data[blockPtr + ptr + 8] << 16;
       uint8_t blockLength = data[blockPtr + ptr + 11];
       if (blockLength == 0 || blockIdentifier == MIDI_CHANNEL_PREFIX)
+        break;
+
+      if (blockPtr + 4 + blockLength > trackHeaderLength)
+        break;
+
+      if (ptr + blockPtr + 12 + blockLength > len)
         break;
 
       if (blockIdentifier == MIDI_TEXT_EVENT)
