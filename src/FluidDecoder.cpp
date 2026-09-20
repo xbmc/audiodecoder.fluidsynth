@@ -54,11 +54,23 @@ bool CFluidCodec::Init(const std::string& filename,
   fluid_synth_sfload(ctx.synth, m_soundfont.c_str(), 1);
   ctx.player = new_fluid_player(ctx.synth);
 
-  size_t size = file.GetLength();
-  uint8_t* temp = new uint8_t[size];
-  file.Read(temp, size);
+  const int64_t size = file.GetLength();
+  if (size <= 0)
+    return false;
+
+  uint8_t* temp = new (std::nothrow) uint8_t[size];
+  if (!temp)
+    return false;
+
+  const int64_t len = file.Read(temp, size);
   file.Close();
-  fluid_player_add_mem(ctx.player, temp, size);
+  if (len <= 0)
+  {
+    delete[] temp;
+    return false;
+  }
+
+  fluid_player_add_mem(ctx.player, temp, len);
   delete[] temp;
   fluid_player_play(ctx.player);
   format = AUDIOENGINE_FMT_FLOAT;
