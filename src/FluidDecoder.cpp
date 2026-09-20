@@ -109,12 +109,12 @@ bool CFluidCodec::ReadTag(const std::string& filename, kodi::addon::AudioDecoder
     return false;
 
   std::vector<int> trackDataFormats;
-  unsigned int ptr = 14;
+  int64_t ptr = 14;
 
   unsigned int trackNameCnt = 0;
   std::string firstTextEvent;
   std::string title;
-  while (ptr < len)
+  while (ptr + 8 <= len)
   {
     uint32_t trackHeader = data[ptr + 3] | data[ptr + 2] << 8 | data[ptr + 1] << 16 |
                            static_cast<uint32_t>(data[ptr]) << 24;
@@ -124,13 +124,16 @@ bool CFluidCodec::ReadTag(const std::string& filename, kodi::addon::AudioDecoder
     if (trackHeader != MIDI_MTrk)
       break;
 
-    unsigned int blockPtr = 0;
-    while (blockPtr < trackHeaderLength)
+    int64_t blockPtr = 0;
+    while (blockPtr < trackHeaderLength && ptr + blockPtr + 12 <= len)
     {
       uint32_t blockIdentifier = data[blockPtr + ptr + 10] | data[blockPtr + ptr + 9] << 8 |
                                  data[blockPtr + ptr + 8] << 16;
       uint8_t blockLength = data[blockPtr + ptr + 11];
       if (blockLength == 0 || blockIdentifier == MIDI_CHANNEL_PREFIX)
+        break;
+
+      if (ptr + blockPtr + 12 + blockLength > len)
         break;
 
       if (blockIdentifier == MIDI_TEXT_EVENT)
