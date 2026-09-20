@@ -91,7 +91,10 @@ bool CFluidCodec::ReadTag(const std::string& filename, kodi::addon::AudioDecoder
   if (!file.OpenFile(filename))
     return false;
 
-  int len = file.GetLength();
+  const int64_t len = file.GetLength();
+  if (len < 14)
+    return false;
+
   uint8_t* data = new uint8_t[len];
   if (!data)
     return false;
