@@ -11,6 +11,8 @@
 #include <kodi/Filesystem.h>
 #include <kodi/General.h>
 
+#include <new>
+
 CFluidCodec::CFluidCodec(const kodi::addon::IInstanceInfo& instance)
   : CInstanceAudioDecoder(instance)
 {
@@ -95,7 +97,7 @@ bool CFluidCodec::ReadTag(const std::string& filename, kodi::addon::AudioDecoder
   if (len < 14)
     return false;
 
-  uint8_t* data = new uint8_t[len];
+  uint8_t* data = new (std::nothrow) uint8_t[len];
   if (!data)
     return false;
 
