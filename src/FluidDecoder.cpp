@@ -113,7 +113,7 @@ bool CFluidCodec::ReadTag(const std::string& filename, kodi::addon::AudioDecoder
   {
     uint32_t trackHeader =
         data[ptr + 3] | data[ptr + 2] << 8 | data[ptr + 1] << 16 | data[ptr] << 24;
-    int32_t trackHeaderLength =
+    uint32_t trackHeaderLength =
         data[ptr + 7] | data[ptr + 6] << 8 | data[ptr + 5] << 16 | data[ptr + 4] << 24;
 
     if (trackHeader != MIDI_MTrk)
