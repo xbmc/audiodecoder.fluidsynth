@@ -155,6 +155,9 @@ bool CFluidCodec::ReadTag(const std::string& filename, kodi::addon::AudioDecoder
       if (blockLength == 0 || blockIdentifier == MIDI_CHANNEL_PREFIX)
         break;
 
+      if (blockPtr + 4 + blockLength > trackHeaderLength)
+        break;
+
       if (ptr + blockPtr + 12 + blockLength > len)
         break;
 
