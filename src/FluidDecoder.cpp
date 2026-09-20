@@ -98,8 +98,10 @@ bool CFluidCodec::ReadTag(const std::string& filename, kodi::addon::AudioDecoder
 
   file.Read(data, len);
 
-  uint32_t header = data[3] | data[2] << 8 | data[1] << 16 | data[0] << 24;
-  uint32_t headerLength = data[7] | data[6] << 8 | data[5] << 16 | data[4] << 24;
+  uint32_t header = data[3] | data[2] << 8 | data[1] << 16 |
+                    static_cast<uint32_t>(data[0]) << 24;
+  uint32_t headerLength = data[7] | data[6] << 8 | data[5] << 16 |
+                          static_cast<uint32_t>(data[4]) << 24;
   if (header != MIDI_HEADER || headerLength != 6)
     return false;
 
@@ -111,10 +113,10 @@ bool CFluidCodec::ReadTag(const std::string& filename, kodi::addon::AudioDecoder
   std::string title;
   while (ptr < len)
   {
-    uint32_t trackHeader =
-        data[ptr + 3] | data[ptr + 2] << 8 | data[ptr + 1] << 16 | data[ptr] << 24;
-    uint32_t trackHeaderLength =
-        data[ptr + 7] | data[ptr + 6] << 8 | data[ptr + 5] << 16 | data[ptr + 4] << 24;
+    uint32_t trackHeader = data[ptr + 3] | data[ptr + 2] << 8 | data[ptr + 1] << 16 |
+                           static_cast<uint32_t>(data[ptr]) << 24;
+    uint32_t trackHeaderLength = data[ptr + 7] | data[ptr + 6] << 8 | data[ptr + 5] << 16 |
+                                 static_cast<uint32_t>(data[ptr + 4]) << 24;
 
     if (trackHeader != MIDI_MTrk)
       break;
