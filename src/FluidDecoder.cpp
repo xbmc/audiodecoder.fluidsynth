@@ -106,7 +106,10 @@ bool CFluidCodec::ReadTag(const std::string& filename, kodi::addon::AudioDecoder
   uint32_t headerLength = data[7] | data[6] << 8 | data[5] << 16 |
                           static_cast<uint32_t>(data[4]) << 24;
   if (header != MIDI_HEADER || headerLength != 6)
+  {
+    delete[] data;
     return false;
+  }
 
   std::vector<int> trackDataFormats;
   int64_t ptr = 14;
